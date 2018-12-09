@@ -92,14 +92,14 @@ shinyApp(
       locations <- users[,c("location")]
       
       #normalize and filter locations
-      #Encoding(locations)  <- "UTF-8"
+      Encoding(locations)  <- "UTF-8"
       locations_corpus <- Corpus(VectorSource(locations))
       loc_clean <- tm_map(locations_corpus, removePunctuation)
       loc_clean <- tm_map(locations_corpus, content_transformer(tolower))
-      loc_clean <- tm_map(loc_clean, removeWords, c(stopwords("english"), "scotland", "Languedoc-Roussillon/Lubelskie", "polska" , "worldwide", "world"))
+      loc_clean <- tm_map(loc_clean, removeWords, c(stopwords("english"), "worldwide", "world"))
       loc_clean <- tm_map(loc_clean, removeNumbers)
       loc_clean <- tm_map(loc_clean, stripWhitespace)
-      #loc_clean <- tm_map(loc_clean, to.plain)
+      loc_clean <- tm_map(loc_clean, to.plain)
       
       print(loc_clean)
       
